@@ -1,47 +1,79 @@
-import { Navbar, TextInput, Button } from "flowbite-react";
-import { Link, useLocation } from "react-router-dom";
-import { AiOutlineSearch } from "react-icons/ai";
-import { FaMoon } from "react-icons/fa";
+import { Avatar, Button, Dropdown, Navbar, TextInput } from 'flowbite-react';
+import { Link, useLocation } from 'react-router-dom';
+import { AiOutlineSearch } from 'react-icons/ai';
+import { FaMoon, FaSun } from 'react-icons/fa';
+import { useSelector, useDispatch } from 'react-redux';
+import { toggleTheme } from '../redux/theme/themeSlice';
+import { FaCrown } from "react-icons/fa";
+
 export function Header() {
     const path = useLocation().pathname;
+    const { currentUser } = useSelector((state) => state.user);
+    const dispatch = useDispatch();
+    const { theme } = useSelector((state) => state.theme);
 
     return (
         <Navbar className="border-b-2">
             <Link to="/" className="self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white">
-                <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-sky-500 to-green-500 rounded-lg text-white">Timothy&apos;s</span>
-                Blog
+                <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-sky-500 to-green-500 rounded-lg text-white">Optima&apos;s</span>
+                Municipality
             </Link>
             <form>
-                <TextInput className="hidden lg:inline" type="text" placeholder="Search..." rightIcon={AiOutlineSearch}/>
+                <TextInput className="hidden lg:inline" type="text" placeholder="Пошук..." rightIcon={AiOutlineSearch}/>
             </form>
             <Button className="w-12 h-10 lg:hidden" color="gray" pill>
                 <AiOutlineSearch/>
             </Button>
-            <div className=" flex gap-2 md:order-2">
-                <Button className="w-12 h-10 hidden sm:inline" color="gray" pill>
-                    <FaMoon/>
+            <div className=" flex justify-between items-center gap-2 md:order-2">
+                <Button className="w-12 h-10 hidden sm:inline" color="gray" pill onClick={() => dispatch(toggleTheme())}>
+                    {theme === "light" ? <FaSun/> : <FaMoon/>}
                 </Button>
-                <Link to="/sign-in" >
-                    <Button gradientDuoTone='greenToBlue' outline>
+                
+                {currentUser ? (
+                        <div className='flex flex-col justify-center items-center'>
+                            {currentUser.vip && (<div><FaCrown className="w-3 h-3"/></div>)}
+                            <Dropdown
+                                arrowIcon={false}
+                                inline
+                                label={
+                                    <Avatar alt='user' img={currentUser.profilePicture} rounded />
+                                }
+                            >
+                                <Dropdown.Header>
+                                    <span className='block text-sm'>@{currentUser.username}</span>
+                                    <span className='block text-sm font-medium truncate'>{currentUser.email}</span>
+                                </Dropdown.Header>
+                                <Link to={'/dashboard?tab=profile'}>
+                                    <Dropdown.Item>Профіль</Dropdown.Item>
+                                </Link>
+                                <Dropdown.Divider />
+                                <Dropdown.Item>Вийти з профілю</Dropdown.Item>
+                            </Dropdown>
+                        </div>
+                        
+                    ) : (
+                    <Link to='/sign-in'>
+                        <Button gradientDuoTone='purpleToBlue' outline>
                         Sign In
-                    </Button>
-                </Link>
+                        </Button>
+                    </Link>
+                    )}
                 <Navbar.Toggle/>
             </div>
             <Navbar.Collapse>
                 <Navbar.Link active={path === "/"} as={'div'}>
                     <Link to="/">
-                        Home
+                        Головна
                     </Link>
                 </Navbar.Link>
                 <Navbar.Link active={path === "/about"} as={'div'}>
                     <Link to="/about">
-                        About
+                        Про нас
                     </Link>
                 </Navbar.Link>
                 <Navbar.Link active={path === "/projects"} as={'div'}>
                     <Link to="/projects">
-                        Projects
+                        Ідеї
                     </Link>
                 </Navbar.Link>
             </Navbar.Collapse>

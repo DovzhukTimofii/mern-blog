@@ -1,6 +1,6 @@
 import { Footer } from "flowbite-react";
 import { Link } from "react-router-dom";
-import { BsFacebook, BsInstagram, BsTwitter, BsGithub, BsLinkedin } from "react-icons/bs";
+import { BsFacebook, BsInstagram } from "react-icons/bs";
 function FooterCom() {
     return (
         <Footer container className="border border-t-8 border-teal-500">
@@ -8,43 +8,40 @@ function FooterCom() {
                 <div className="grid w-full justify-between sm:flex md:grid-cols-1">
                     <div className="mt-5">
                         <Link to="/" className="self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white">
-                            <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-sky-500 to-green-500 rounded-lg text-white">Timothy&apos;s</span>
-                            Blog
+                            <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-sky-500 to-green-500 rounded-lg text-white">Optima</span>
+                            Municipality
                         </Link>
                     </div>
                     <div className="grid grid-cols-2 gap-8 mt-4 sm:grid-cols-3 sm:gap-6">
                         <div>
-                            <Footer.Title title="About"/>
+                            <Footer.Title title="Інформація"/>
                             <Footer.LinkGroup col>
-                                <Footer.Link href="https://dovzhuktimofii.github.io/portfolio/" target="_blank" rel="noopener noreferrer">My website</Footer.Link>
-                                <Footer.Link href="/about" target="_blank" rel="noopener noreferrer" >Timothy&apos;s Blog</Footer.Link>
+                                <Footer.Link href="https://b.optima-osvita.org/login/index.php" target="_blank" rel="noopener noreferrer">Головна сторінка Optima</Footer.Link>
+                                <Footer.Link href="/about" target="_blank" rel="noopener noreferrer" >Про нас</Footer.Link>
                             </Footer.LinkGroup>
                         </div>
                         <div>
-                            <Footer.Title title="Follow me"/>
+                            <Footer.Title title="Слідкуй за нами"/>
                             <Footer.LinkGroup col>
                                 <Footer.Link href="https://github.com/DovzhukTimofii" target="_blank" rel="noopener noreferrer">Github</Footer.Link>
                                 <Footer.Link href="#" target="_blank" rel="noopener noreferrer">Discord</Footer.Link>
                             </Footer.LinkGroup>
                         </div>
                         <div>
-                            <Footer.Title title="Legal"/>
+                            <Footer.Title title="Юридично"/>
                             <Footer.LinkGroup col>
-                                <Footer.Link href="#">Privacy Policy</Footer.Link>
-                                <Footer.Link href="#">Terms &amp; Conditions</Footer.Link>
+                                <Footer.Link href="#">Політика конфіденційності</Footer.Link>
+                                <Footer.Link href="#">Умови</Footer.Link>
                             </Footer.LinkGroup>
                         </div>
                     </div>
                 </div>
                 <Footer.Divider/>
                 <div className="w-full sm:flex sm:items-center sm:justify-between">
-                    <Footer.Copyright href="#" by="Timothy&apos;s Blog" year={new Date().getFullYear()}/>
+                    <Footer.Copyright href="#" by="Optima Municipality" year={new Date().getFullYear()}/>
                     <div className="flex gap-6 sm:mt-0 mt-4 sm:justify-center">
-                        <Footer.Icon href="https://www.facebook.com/tymofii.dovzhuk?locale=uk_UA" icon={BsFacebook}/>
-                        <Footer.Icon href="https://www.instagram.com/tymofiidovzhuk/" icon={BsInstagram}/>
-                        <Footer.Icon href="https://twitter.com/DovzukT" icon={BsTwitter}/>
-                        <Footer.Icon href="https://github.com/DovzhukTimofii" icon={BsGithub}/>
-                        <Footer.Icon href="https://www.linkedin.com/in/timofii-dovzhuk-079571294/" icon={BsLinkedin}/>
+                        <Footer.Icon href="https://www.facebook.com/groups/235413530722535?locale=uk_UA" icon={BsFacebook}/>
+                        <Footer.Icon href="https://www.instagram.com/optima.school/" icon={BsInstagram}/>
                     </div>
                 </div>  
             </div>

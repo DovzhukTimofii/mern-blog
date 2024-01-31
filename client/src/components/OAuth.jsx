@@ -36,7 +36,7 @@ export default function OAuth() {
     return (
         <Button type='button' gradientDuoTone="purpleToBlue" onClick={handleGoogleClick} outline>
             <AiFillGoogleCircle className="w-6 h-6 mr-2" />
-            Sign in with Google
+            Увійти за допомогою Google
         </Button>
     )
 }

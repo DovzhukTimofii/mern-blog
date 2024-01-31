@@ -20,7 +20,7 @@ export function SignIn () {
     e.preventDefault();
 
     if(!formData.password || !formData.email) {
-      return dispatch(signInError("Please fill in all fields"));
+      return dispatch(signInError("Будь ласка, заповніть усі поля"));
     }
     try {
       dispatch(signInStart());
@@ -56,35 +56,35 @@ export function SignIn () {
         {/* left */}
         <div className="flex-1">
           <Link to="/" className="font-bold dark:text-white text-4xl">
-                <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-sky-500 to-green-500 rounded-lg text-white">Timothy&apos;s</span>
-                Blog
+                <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-sky-500 to-green-500 rounded-lg text-white">Optima</span>
+                Municipality
           </Link>
-          <p className="text-sm mt-5">This is a demo project. You can sign in with email and password or with Google.</p>
+          <p className="text-sm mt-5">Ви можете увійти за допомогою електронної пошти та пароля або за допомогою Google.</p>
         </div>
         {/* right */}
         <div className="flex-1">
           <form className="flex flex-col gap-4" onSubmit={handleSubmite}>
             <div>
-              <Label value="Your email"/>
+              <Label value="Ваша електронна пошта"/>
               <TextInput type="email" placeholder="name@company.com" id="email" onChange={handleChange}/>
             </div>
             <div>
-              <Label value="Your password"/>
-              <TextInput type="password" placeholder="************" id="password" onChange={handleChange}/>
+              <Label value="Ваш пароль"/>
+              <TextInput type="password" placeholder='Пароль' id="password" onChange={handleChange}/>
             </div>
             <Button gradientDuoTone='greenToBlue' type="submite" disabled={loading}>
               {loading ? (
                 <>
                   <Spinner size="sm"/>
-                  <span className="pl-3">loading ...</span>
+                  <span className="pl-3">Завантаження ...</span>
                 </>
-              ) : "Sign In"}
+              ) : "Увійти"}
             </Button>
             <OAuth/>
           </form>
           <div className="flex gap-2 text-sm mt-5">
-            <span>Don&apos;t have an account?</span>
-            <Link to="/sign-up" className="text-sky-500">Sign Up</Link>
+            <span>Не маєте облікового запису?</span>
+            <Link to="/sign-up" className="text-sky-500">Зареєструватися</Link>
           </div>
           {errorMessage && (
               <Alert className="mt-5" color='failure'>{errorMessage}</Alert>
