@@ -6,7 +6,7 @@ export const test = (req, res) => {
   res.json({message: 'Api working !'})
 }
 
-export const updateUser = async (req, res, next) => {
+export const updateuser = async (req, res, next) => {
   if (req.user.id !== req.params.userId) {
     return next(errorHandler(403, 'Ви не маєте права оновлювати цього користувача'));
   }
@@ -35,7 +35,7 @@ export const updateUser = async (req, res, next) => {
     }
   }
   try {
-    const updatedUser = await User.findByIdAndUpdate(
+    const updateduser = await User.findByIdAndUpdate(
       req.params.userId,
       {
         $set: {
@@ -47,15 +47,15 @@ export const updateUser = async (req, res, next) => {
       },
       { new: true }
     );
-    const { password, ...rest } = updatedUser._doc;
+    const { password, ...rest } = updateduser._doc;
     res.status(200).json(rest);
   } catch (error) {
     next(error);
   }
 };
 
-export const deleteUser = async (req, res, next) => {
-  if(req.user.id !== req.params.userId) {
+export const deleteuser = async (req, res, next) => {
+  if(!req.user.vip && req.user.id !== req.params.userId) {
     return next(errorHandler(403, 'Ви не маєте права видаляти цього користувача'));
   }
 
@@ -70,6 +70,45 @@ export const deleteUser = async (req, res, next) => {
 export const signout = async (req, res, next) => {
   try {
     res.clearCookie('acces_token').status(200).json('Користувача було видалено!');
+  } catch (error) {
+    next(error);
+  }
+}
+
+export const getusers = async (req, res, next) => {
+  if(!req.user.vip) {
+    return next(errorHandler(403, 'Ви не маєте права бачити всіх користувачів'));
+  }
+  try {
+    const startIndex = parseInt(req.query.startIndex) || 0;
+    const limit = parseInt(req.query.limit) || 9;
+    const sortDirection = req.query.sort === 'asc' ? 1 : -1;
+
+    const user = await User.find().sort({createAt: sortDirection}).skip(startIndex).limit(limit);
+
+    const usersWhithoutPassword = user.map((user) => {
+      const {password, ...rest} = user._doc;
+      return rest;
+    });
+
+    const totalUsers = await User.countDocuments();
+
+    const now = new Date();
+
+    const oneMonthAgo = new Date(
+      now.getFullYear(),
+      now.getMonth() - 1,
+      now.getDate()
+    );
+
+    const lastMonthUsers = await User.countDocuments({createAt: {$gte: oneMonthAgo}});
+
+    res.status(200).json({
+      users:  usersWhithoutPassword,
+      totalUsers,
+      lastMonthUsers
+    })
+
   } catch (error) {
     next(error);
   }

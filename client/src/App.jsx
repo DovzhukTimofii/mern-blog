@@ -9,10 +9,15 @@ import { Projects } from "./pages/Projects";
 import Footer from "./components/Footer";
 import PrivateRoute from "./components/PrivateRoute";
 import CreatePost from "./pages/CreatePost";
+import UpdatePost from "./pages/UpdatePost";
+import PostPage from './pages/PostPage'
+import VipPrivateRoute from "./components/VipPrivateRoute";
+import ScrollToTop from "./components/ScrollToTop";
 
 export default function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop/>
       <Header/>
       <Routes>
         <Route path="/" element={<Home />}/>
@@ -24,8 +29,14 @@ export default function App() {
         </Route>
         <Route element={<PrivateRoute/>}>
           <Route path="/create-post" element={<CreatePost />}/>
+          <Route path="/update-post/:postId" element={<UpdatePost />}/>
+        </Route>
+        <Route element={<VipPrivateRoute/>}>
+          <Route path="/dashboard?tab=allposts" element={<Dashboard />}/>
+          <Route path="/dashboard?tab=users" element={<Dashboard />}/>
         </Route>
         <Route path="/projects" element={<Projects />}/>
+        <Route path='/post/:postSlug' element={<PostPage />} />
       </Routes>
       <Footer/>
     </BrowserRouter>

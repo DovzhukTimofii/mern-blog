@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { HiOutlineExclamationCircle } from 'react-icons/hi'
 import { Modal, Button } from "flowbite-react";
 
-export default function DashPosts() {
+export default function DashAllPosts() {
   const {currentUser} = useSelector((state) => state.user);
   const [userPosts, setUserPosts] = useState([]);
   const [showMore, setShowMore] = useState(true);
@@ -16,7 +16,7 @@ export default function DashPosts() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const res = await fetch(`/api/post/getposts?userId=${currentUser._id}`);
+        const res = await fetch(`/api/post/getposts`);
         const data = await res.json();
         if(res.ok) {
           setUserPosts(data.posts);
@@ -80,9 +80,6 @@ export default function DashPosts() {
               <Table.HeadCell>Назва поста</Table.HeadCell>
               <Table.HeadCell>Категорія</Table.HeadCell>
               <Table.HeadCell>Видалити</Table.HeadCell>
-              <Table.HeadCell>
-                <span>Редагувати</span>
-              </Table.HeadCell>
             </Table.Head>
             {userPosts.map((post) => (
               <TableBody className="divide-y" key={post}>
@@ -104,11 +101,6 @@ export default function DashPosts() {
                         setPostIdToDelete(post._id)}}
                       >Видалити</span>
                   </Table.Cell>
-                  <Table.Cell >
-                      <Link className="text-teal-500" to={`/update-post/${post._id}`}>
-                        <span>Редагувати</span>
-                      </Link>
-                  </Table.Cell>
                 </Table.Row>
               </TableBody>
             ))}
@@ -120,7 +112,7 @@ export default function DashPosts() {
           )}
         </>
       ) : (
-        <p>У тебе зараз немає постів</p>
+        <p>Немає постів</p>
       )}
       <Modal show={showModal} onClose={() => setShowModal(false)} popup size='md'>
         <Modal.Header/>
