@@ -6,14 +6,12 @@ export default function CallToAction() {
       <div className="flex-1 justify-center flex flex-col">
         <h2 className="text-2xl">У вас э запитання до призидента студ. парламенту?</h2>
         <p className="text-gray-500 my-2">Звертайтеся сюди.</p>
-        <Button gradientDuoTone="purpleToBlue" className="rounded-tl-xl rounded-bl-none">
-            <a href="https://t.me/nikolaok" target="_blank" rel="noopener noreferrer">
-                Телеграм чат
-            </a>
-        </Button>
+        <Button href="https://t.me/nikolaok" gradientDuoTone="purpleToBlue" className="rounded-tl-xl rounded-bl-none">
+          Телеграм чат
+        </Button>    
       </div>
-      <div className="p-7 flex-1">
-        <img src="https://i.ytimg.com/vi/CHL0TBlHPnI/maxresdefault.jpg"/>
+      <div className="p-7 rounded-2xl  flex-1">
+        <img className="rounded-2xl" src="https://i.ytimg.com/vi/CHL0TBlHPnI/maxresdefault.jpg"/>
       </div>
     </div>
   )

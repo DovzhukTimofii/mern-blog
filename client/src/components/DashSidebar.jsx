@@ -1,5 +1,5 @@
 import { Sidebar } from 'flowbite-react'
-import { HiUser, HiArrowSmRight, HiDocumentText, HiOutlineUserGroup, HiDocumentDuplicate } from 'react-icons/hi'
+import { HiUser, HiArrowSmRight, HiDocumentText, HiOutlineUserGroup, HiDocumentDuplicate, HiAnnotation, HiChartPie } from 'react-icons/hi'
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from 'react-redux';
@@ -50,6 +50,13 @@ export default function DashSidebar() {
               Профіль
             </Sidebar.Item>
           </Link>
+          {currentUser && currentUser.vip && (
+            <Link to='/dashboard?tab=dash'>
+              <Sidebar.Item active={tab === "dash" || !tab} icon={HiChartPie} as="div">
+                Адмін Панель
+              </Sidebar.Item>
+            </Link>
+          )}
           <Link to='/dashboard?tab=posts'>
             <Sidebar.Item active={tab === 'posts'} icon={HiDocumentText} as="div">
               Мої Публікації
@@ -69,8 +76,13 @@ export default function DashSidebar() {
               </Sidebar.Item>
             </Link>
           )}
-          
-          
+          {currentUser.vip && (
+            <Link to='/dashboard?tab=comments'>
+              <Sidebar.Item active={tab === 'comments'} icon={HiAnnotation} as="div">
+                Коментарі
+              </Sidebar.Item>
+            </Link>
+          )}
           <Sidebar.Item onClick={handleSignout} icon={HiArrowSmRight} className='cursor-pointer'>
             Вийти з Профілю
           </Sidebar.Item>

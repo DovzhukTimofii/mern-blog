@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { useSelector } from 'react-redux';
 import DashSidebar from "../components/DashSidebar";
 import DashProfile from "../components/DashProfile";
 import DashPosts from "../components/DashPosts";
 import DashAllPosts from "../components/DashAllPosts";
-import { useSelector } from 'react-redux';
+import DashComments from "../components/DashComments";
 import DashUsers from "../components/DashUsers";
+import DashboardComp from "../components/DashboardComp";
 
 export function Dashboard() {
   const location = useLocation();
@@ -28,6 +30,8 @@ export function Dashboard() {
       {tab === 'posts' && <DashPosts/>}
       {currentUser.vip && tab === 'allposts' && <DashAllPosts/>}
       {currentUser.vip && tab === 'users' && <DashUsers/>}
+      {currentUser.vip && tab === 'comments' && <DashComments/>}
+      {currentUser.vip && tab === 'dash' && <DashboardComp/>}
     </div>
   );
 }

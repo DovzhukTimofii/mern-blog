@@ -92,10 +92,10 @@ export default function CreatePost() {
             onChange={(e) => setFormData({...formData, title: e.target.value})}
           />
           <Select onChange={(e) => setFormData({...formData, category: e.target.value})}> 
-            <option value='uncategorized'>Обери категорію</option>
-            <option value='idea'>Ідея</option>
-            <option value='problem'>Проблема</option>
-            <option value='other'>Iнше</option>
+            <option value='без категорії'>Обери категорію</option>
+            <option value='ідея'>Ідея</option>
+            <option value='проблема'>Проблема</option>
+            <option value='іншe'>Iнше</option>
           </Select>
         </div>
         <div className='flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3'>
