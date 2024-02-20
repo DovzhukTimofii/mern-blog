@@ -23,15 +23,7 @@ function FooterCom() {
                         <div>
                             <Footer.Title title="Слідкуй за нами"/>
                             <Footer.LinkGroup col>
-                                <Footer.Link href="https://github.com/DovzhukTimofii" target="_blank" rel="noopener noreferrer">Github</Footer.Link>
-                                <Footer.Link href="#" target="_blank" rel="noopener noreferrer">Discord</Footer.Link>
-                            </Footer.LinkGroup>
-                        </div>
-                        <div>
-                            <Footer.Title title="Юридично"/>
-                            <Footer.LinkGroup col>
-                                <Footer.Link href="#">Політика конфіденційності</Footer.Link>
-                                <Footer.Link href="#">Умови</Footer.Link>
+                                <Footer.Link href="https://github.com/DovzhukTimofii/mern-blog" target="_blank" rel="noopener noreferrer">Код проекту на Github</Footer.Link>
                             </Footer.LinkGroup>
                         </div>
                     </div>

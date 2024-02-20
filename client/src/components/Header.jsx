@@ -1,17 +1,30 @@
 import { Avatar, Button, Dropdown, Navbar, TextInput } from 'flowbite-react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { FaMoon, FaSun } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleTheme } from '../redux/theme/themeSlice';
 import { FaCrown } from "react-icons/fa";
 import { signOutSuccess } from "../redux/user/userSlice";
+import { useEffect, useState } from 'react';
 
 export function Header() {
     const path = useLocation().pathname;
+    const location = useLocation();
+    const navigate = useNavigate();
     const { currentUser } = useSelector((state) => state.user);
     const dispatch = useDispatch();
     const { theme } = useSelector((state) => state.theme);
+    const [searchTerm, setSearchTerm] = useState('');
+   
+
+    useEffect(() => {
+        const urlParams = new URLSearchParams(location.search);
+        const searchTermFromUrl = urlParams.get('searchTerm');
+        if (searchTermFromUrl) {
+          setSearchTerm(searchTermFromUrl);
+        }
+    }, [location.search]);
 
     const handleSignout = async () => {
         try{
@@ -29,15 +42,27 @@ export function Header() {
         }
     }
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        try {
+            const urlParams = new URLSearchParams(location.search);
+            urlParams.set('searchTerm', searchTerm);
+            const searchQuery = urlParams.toString();
+            navigate(`/search?${searchQuery}`);
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
 
     return (
         <Navbar className="border-b-2">
             <Link to="/" className="self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white">
-                <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-sky-500 to-green-500 rounded-lg text-white">Optima&apos;s</span>
+                <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-sky-500 to-green-500 rounded-lg text-white">Optima</span>
                 Municipality
             </Link>
-            <form>
-                <TextInput className="hidden lg:inline" type="text" placeholder="Пошук..." rightIcon={AiOutlineSearch}/>
+            <form onSubmit={handleSubmit}>
+                <TextInput className="hidden lg:inline" type="text" placeholder="Пошук..." rightIcon={AiOutlineSearch} value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}/>
             </form>
             <Button className="w-12 h-10 lg:hidden" color="gray" pill>
                 <AiOutlineSearch/>
@@ -87,11 +112,6 @@ export function Header() {
                 <Navbar.Link active={path === "/about"} as={'div'}>
                     <Link to="/about">
                         Про нас
-                    </Link>
-                </Navbar.Link>
-                <Navbar.Link active={path === "/projects"} as={'div'}>
-                    <Link to="/projects">
-                        Ідеї
                     </Link>
                 </Navbar.Link>
             </Navbar.Collapse>

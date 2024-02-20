@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
     vip: {
         type: Boolean,
         default: false
-    }
+    },
 }, {timestamps: true});
 
 const User = mongoose.model("User", userSchema);
