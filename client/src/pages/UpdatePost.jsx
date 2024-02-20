@@ -120,6 +120,7 @@ export default function UpdatePost() {
             <option value='без категорії'>Обери категорію</option>
             <option value='ідея'>Ідея</option>
             <option value='проблема'>Проблема</option>
+            <option value='волонтерство'>Волонтерство</option>
             <option value='іншe'>Iнше</option>
           </Select>
         </div>
