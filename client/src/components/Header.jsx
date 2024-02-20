@@ -8,6 +8,7 @@ import { FaCrown } from "react-icons/fa";
 import { signOutSuccess } from "../redux/user/userSlice";
 import { useEffect, useState } from 'react';
 
+
 export function Header() {
     const path = useLocation().pathname;
     const location = useLocation();
@@ -57,7 +58,7 @@ export function Header() {
 
     return (
         <Navbar className="border-b-2">
-            <Link to="/" className="self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white">
+            <Link translate='no' to="/" className="self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white">
                 <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-sky-500 to-green-500 rounded-lg text-white">Optima</span>
                 Municipality
             </Link>
@@ -114,6 +115,13 @@ export function Header() {
                         Про нас
                     </Link>
                 </Navbar.Link>
+                {currentUser && (
+                    <Navbar.Link active={path === "/create-post"} as={'div'}>
+                        <Link to={"/create-post"}>
+                            Створити ідею
+                        </Link>
+                    </Navbar.Link>
+                )}
             </Navbar.Collapse>
         </Navbar>
     )

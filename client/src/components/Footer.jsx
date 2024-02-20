@@ -7,7 +7,7 @@ function FooterCom() {
             <div className="w-full max-w-7xl mx-auto">
                 <div className="grid w-full justify-between sm:flex md:grid-cols-1">
                     <div className="mt-5">
-                        <Link to="/" className="self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white">
+                        <Link translate='no' to="/" className="self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white">
                             <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-sky-500 to-green-500 rounded-lg text-white">Optima</span>
                             Municipality
                         </Link>
