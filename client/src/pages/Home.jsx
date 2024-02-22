@@ -6,7 +6,6 @@ import { OrbitControls, Environment, Stars } from '@react-three/drei';
 import { StudentHat } from "../../public/StudentHat";
 import CallToAction from '../components/CallToAction';
 import PostCard from '../components/PostCard';
-import Loader from '../components/Loader';
 
 export function Home() {
   const [posts, setPosts] = useState([]);
@@ -45,13 +44,13 @@ export function Home() {
           
           <Canvas className='z-10 h-[100px] hidden  lg:block'>
             {/* <ambientLight intensity={1.5}/> */}
-            <Suspense fallback={<Loader/>}>
-              <camera bias={2} />
-              <OrbitControls autoRotate={true} enableRotate={false} enablePan={false} enableZoom={false}/>
-              <Suspense fallback={null}>
-                <StudentHat position={[-1, -1, -2]}/>
-              </Suspense>
+            
+            <camera bias={2} />
+            <OrbitControls autoRotate={true} enableRotate={false} enablePan={false} enableZoom={false}/>
+            <Suspense fallback={null}>
+              <StudentHat position={[-1, -1, -2]}/>
             </Suspense>
+            
             <Environment preset='sunset'/>
           </Canvas>
         </div>
