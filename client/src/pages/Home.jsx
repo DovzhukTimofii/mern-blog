@@ -6,7 +6,7 @@ import { OrbitControls, Environment, Stars } from '@react-three/drei';
 import { StudentHat } from "../../public/StudentHat";
 import CallToAction from '../components/CallToAction';
 import PostCard from '../components/PostCard';
-
+import Loader from '../components/Loader';
 
 export function Home() {
   const [posts, setPosts] = useState([]);
@@ -33,7 +33,7 @@ export function Home() {
           <div className='z-10 flexa flex-col gap-6 p-28 px-3 max-w-6xl mx-auto '>
             <h1 className='text-3xl font-bold pb-5 lg:text-6xl'>Ласкаво просимо до Optima Municipality </h1>
             <p className='text-gray-500  text-xs sm:text-sm'>
-              Тут ви можете залишати свої прблеми та едії для втілення у системі навчання коледжу Optima.
+              Тут ви можете залишати свої прoблеми та едеї для втілення у системі навчання коледжу Optima.
             </p>
             <Link
               to='/search'
@@ -45,12 +45,13 @@ export function Home() {
           
           <Canvas className='z-10 h-[100px] hidden  lg:block'>
             {/* <ambientLight intensity={1.5}/> */}
-            <camera bias={2} />
-            <OrbitControls autoRotate={true} enableRotate={false} enablePan={false} enableZoom={false}/>
-            <Suspense fallback={null}>
-              <StudentHat position={[-1, -1, -2]}/>
+            <Suspense fallback={<Loader/>}>
+              <camera bias={2} />
+              <OrbitControls autoRotate={true} enableRotate={false} enablePan={false} enableZoom={false}/>
+              <Suspense fallback={null}>
+                <StudentHat position={[-1, -1, -2]}/>
+              </Suspense>
             </Suspense>
-            
             <Environment preset='sunset'/>
           </Canvas>
         </div>
