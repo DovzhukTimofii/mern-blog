@@ -29,7 +29,7 @@ export function Home() {
         </div>
         
         <div className=' flex flex-row items-center p-7'>
-          <div className='z-10 flexa flex-col gap-6 p-28 px-3 max-w-6xl mx-auto '>
+          <div className='flexa flex-col gap-6 p-28 px-3 max-w-6xl mx-auto '>
             <h1 className='text-3xl font-bold pb-5 lg:text-6xl'>Ласкаво просимо до Optima Municipality </h1>
             <p className='text-gray-500  text-xs sm:text-sm'>
               Тут ви можете залишати свої прoблеми та едеї для втілення у системі навчання коледжу Optima.
@@ -42,9 +42,7 @@ export function Home() {
             </Link>
           </div>
           
-          <Canvas className='z-10 h-[100px] hidden  lg:block'>
-            {/* <ambientLight intensity={1.5}/> */}
-            
+          <Canvas className='h-[100px] hidden  lg:block'>
             <camera bias={2} />
             <OrbitControls autoRotate={true} enableRotate={false} enablePan={false} enableZoom={false}/>
             <Suspense fallback={null}>
