@@ -1,6 +1,7 @@
 import { Footer } from "flowbite-react";
 import { Link } from "react-router-dom";
 import { BsFacebook, BsInstagram } from "react-icons/bs";
+// import MonoBankBar from "./MonoBankBar";
 function FooterCom() {
     return (
         <Footer container className="border border-t-8 border-teal-500">
@@ -24,6 +25,7 @@ function FooterCom() {
                             <Footer.Title title="Слідкуй за нами"/>
                             <Footer.LinkGroup col>
                                 <Footer.Link href="https://github.com/DovzhukTimofii/mern-blog" target="_blank" rel="noopener noreferrer">Код проекту на Github</Footer.Link>
+                                {/* <Footer.Link href="https://send.monobank.ua/jar/3BuKHwxwgY" target="_blank" rel="noopener noreferrer"><MonoBankBar/></Footer.Link>   */}
                             </Footer.LinkGroup>
                         </div>
                     </div>

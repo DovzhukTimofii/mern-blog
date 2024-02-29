@@ -115,13 +115,16 @@ export function Header() {
                         Про нас
                     </Link>
                 </Navbar.Link>
-                {currentUser && (
-                    <Navbar.Link active={path === "/create-post"} as={'div'}>
-                        <Link to={"/create-post"}>
-                            Створити ідею
-                        </Link>
-                    </Navbar.Link>
-                )}
+                <Navbar.Link active={path === "/create-post"} as={'div'}>
+                    <Link to={currentUser ? "/create-post" : "/sign-in"}>
+                        Створити ідею
+                    </Link>
+                </Navbar.Link>
+                <Navbar.Link active={path === "/main-chat"} as={'div'}>
+                    <Link to={currentUser ? "/main-chat" : "/sign-in"}>
+                        Головний чат 
+                    </Link>
+                </Navbar.Link>
             </Navbar.Collapse>
         </Navbar>
     )

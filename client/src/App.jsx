@@ -13,6 +13,9 @@ import PostPage from './pages/PostPage'
 import VipPrivateRoute from "./components/VipPrivateRoute";
 import ScrollToTop from "./components/ScrollToTop";
 import Search from "./pages/Search";
+import MainChat from "./pages/MainChat";
+
+
 
 export default function App() {
   return (
@@ -27,6 +30,7 @@ export default function App() {
         <Route path="/search" element={<Search />}/>
         <Route element={<PrivateRoute/>}>
           <Route path="/dashboard" element={<Dashboard />}/>
+          <Route path="/main-chat" element={<MainChat />}/>
         </Route>
         <Route element={<PrivateRoute/>}>
           <Route path="/create-post" element={<CreatePost />}/>

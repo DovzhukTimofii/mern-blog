@@ -1,5 +1,6 @@
 import { signInSuccess, signInStart, signInError } from "../redux/user/userSlice";
-import { Alert, Button, Label, Spinner, TextInput } from "flowbite-react";
+import { toggleTrue, toggleFalse } from "../redux/mainChatRedux/mainChatSlice";
+import { Alert, Button, Label, Spinner,  TextInput } from "flowbite-react";
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch , useSelector } from "react-redux";
 import { useState } from "react"; 
@@ -40,12 +41,14 @@ export function SignIn () {
 
       if(res.ok) {
         dispatch(signInSuccess(data));
+        dispatch(toggleTrue());
         navigate('/');
       }
 
       return data;
     } catch (error) { 
       dispatch(signInError(error.message));
+      dispatch(toggleFalse());
     }
     
   }
