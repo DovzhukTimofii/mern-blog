@@ -8,6 +8,7 @@ import DashAllPosts from "../components/DashAllPosts";
 import DashComments from "../components/DashComments";
 import DashUsers from "../components/DashUsers";
 import DashboardComp from "../components/DashboardComp";
+import Footer from "../components/Footer"
 
 export function Dashboard() {
   const location = useLocation();
@@ -22,16 +23,19 @@ export function Dashboard() {
   }, [location.search]);
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row">
-      <div className='md:w-56'>
-        <DashSidebar />
+    <>
+      <div className="min-h-screen flex flex-col md:flex-row">
+        <div className='md:w-56'>
+          <DashSidebar />
+        </div>
+        {tab === 'profile' && <DashProfile />}
+        {tab === 'posts' && <DashPosts/>}
+        {currentUser.vip && tab === 'allposts' && <DashAllPosts/>}
+        {currentUser.vip && tab === 'users' && <DashUsers/>}
+        {currentUser.vip && tab === 'comments' && <DashComments/>}
+        {currentUser.vip && tab === 'dash' && <DashboardComp/>}
       </div>
-      {tab === 'profile' && <DashProfile />}
-      {tab === 'posts' && <DashPosts/>}
-      {currentUser.vip && tab === 'allposts' && <DashAllPosts/>}
-      {currentUser.vip && tab === 'users' && <DashUsers/>}
-      {currentUser.vip && tab === 'comments' && <DashComments/>}
-      {currentUser.vip && tab === 'dash' && <DashboardComp/>}
-    </div>
+      <Footer/>
+    </>
   );
 }

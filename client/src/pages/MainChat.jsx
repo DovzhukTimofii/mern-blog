@@ -88,10 +88,10 @@ export default function MainChat() {
     }, []);
 
     return (
-        <div className="min-h-screen relative">
+        <div className="overflow-y-hidden  min-h-screen relative">
             {showChat && (
                 <div className="chat-window">
-                    <div className="w-full h-screen overflow-auto">
+                    <div className="w-full pb-60 h-screen overflow-auto">
                         {messageList.map((messageContent) => {
                         return (
                             // eslint-disable-next-line react/jsx-key

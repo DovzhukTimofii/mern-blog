@@ -7,6 +7,7 @@ import { CircularProgressbar } from 'react-circular-progressbar';
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import 'react-quill/dist/quill.snow.css';
+import Footer from "../components/Footer";
 
 export default function UpdatePost() {
   const [file, setFile] = useState(null);
@@ -103,77 +104,80 @@ export default function UpdatePost() {
   }
 
   return (
-    <div translate='no' className='p-3 max-w-3xl mx-auto min-h-screen'>
-      <h1 className='text-center text-3xl my-7 font-semibold'>Редагувати Пост</h1>
-      <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
-        <div className='flex flex-col gap-4 sm:flex-row justify-between'>
-          <TextInput
-            type='text'
-            placeholder='Назва'
+    <>
+      <div translate='no' className='p-3 max-w-3xl mx-auto min-h-screen'>
+        <h1 className='text-center text-3xl my-7 font-semibold'>Редагувати Пост</h1>
+        <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
+          <div className='flex flex-col gap-4 sm:flex-row justify-between'>
+            <TextInput
+              type='text'
+              placeholder='Назва'
+              required
+              id='title'
+              className='flex-1'
+              onChange={(e) => setFormData({...formData, title: e.target.value})}
+              value={formData.title}
+            />
+            <Select value={formData.category} onChange={(e) => setFormData({...formData, category: e.target.value})}> 
+              <option value='без категорії'>Обери категорію</option>
+              <option value='ідея'>Ідея</option>
+              <option value='проблема'>Проблема</option>
+              <option value='волонтерство'>Волонтерство</option>
+              <option value='іншe'>Iнше</option>
+            </Select>
+          </div>
+          <div className='flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3'>
+            <FileInput
+              type='file'
+              accept='image/*'
+              onChange={(e) => setFile(e.target.files[0])}
+            />
+            <Button
+              type='button'
+              gradientDuoTone='purpleToBlue'
+              size='sm'
+              outline
+              onClick={handleUpdloadImage}
+              disabled={imageUploadProgress}
+            >
+              {imageUploadProgress ? (
+                <div className='w-16 h-16'>
+                  <CircularProgressbar
+                    value={imageUploadProgress}
+                    text={`${imageUploadProgress || 0}%`}
+                  />
+                </div>
+              ) : (
+                'Завантажити зображення'
+              )}
+            </Button>
+          </div>
+          {imageUploadError && <Alert color='failure'>{imageUploadError}</Alert>}
+          {formData.image && (
+            <img
+              src={formData.image}
+              alt='upload'
+              className='w-full h-72 object-cover'
+            />
+          )
+          }
+          <ReactQuill
+            value={formData.content}
+            theme='snow'
+            placeholder='Напиши щось...'
+            className='h-72 mb-12'
             required
-            id='title'
-            className='flex-1'
-            onChange={(e) => setFormData({...formData, title: e.target.value})}
-            value={formData.title}
+            onChange={(value) => setFormData({...formData, content: value})}
           />
-          <Select value={formData.category} onChange={(e) => setFormData({...formData, category: e.target.value})}> 
-            <option value='без категорії'>Обери категорію</option>
-            <option value='ідея'>Ідея</option>
-            <option value='проблема'>Проблема</option>
-            <option value='волонтерство'>Волонтерство</option>
-            <option value='іншe'>Iнше</option>
-          </Select>
-        </div>
-        <div className='flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3'>
-          <FileInput
-            type='file'
-            accept='image/*'
-            onChange={(e) => setFile(e.target.files[0])}
-          />
-          <Button
-            type='button'
-            gradientDuoTone='purpleToBlue'
-            size='sm'
-            outline
-            onClick={handleUpdloadImage}
-            disabled={imageUploadProgress}
-          >
-            {imageUploadProgress ? (
-              <div className='w-16 h-16'>
-                <CircularProgressbar
-                  value={imageUploadProgress}
-                  text={`${imageUploadProgress || 0}%`}
-                />
-              </div>
-            ) : (
-              'Завантажити зображення'
-            )}
+          <Button type='submit' gradientDuoTone='greenToBlue'>
+            Оновити пост
           </Button>
-        </div>
-        {imageUploadError && <Alert color='failure'>{imageUploadError}</Alert>}
-        {formData.image && (
-          <img
-            src={formData.image}
-            alt='upload'
-            className='w-full h-72 object-cover'
-          />
-        )
-        }
-        <ReactQuill
-          value={formData.content}
-          theme='snow'
-          placeholder='Напиши щось...'
-          className='h-72 mb-12'
-          required
-          onChange={(value) => setFormData({...formData, content: value})}
-        />
-        <Button type='submit' gradientDuoTone='greenToBlue'>
-          Оновити пост
-        </Button>
-        {
-          publishError && <Alert className='mt-5' color='failure'>{publishError}</Alert>
-        }
-      </form>
-    </div>
+          {
+            publishError && <Alert className='mt-5' color='failure'>{publishError}</Alert>
+          }
+        </form>
+      </div>
+      <Footer/>
+    </>
   );
 }

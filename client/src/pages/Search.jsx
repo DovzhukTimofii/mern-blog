@@ -1,7 +1,9 @@
 import { Button, Select, TextInput } from "flowbite-react"
 import { useEffect, useState } from "react"
 import { useNavigate }  from 'react-router-dom';
-import PostCard from "../components/PostCard"
+import PostCard from "../components/PostCard";
+import Footer from "../components/Footer";
+
 export default function Search() {
     const navigate = useNavigate();
     const [sidebarData, setSidebarData] = useState({
@@ -106,55 +108,58 @@ export default function Search() {
         }
     };
     return (
-        <div className="flex flex-col md:flex-row">
-            <div className="p-7 border-b md:border-r md:min-h-screen border-gray-500">
-                <form className="flex flex-col gap-8" onSubmit={handleSubmit}>
-                    <div className="flex items-center gap-2">
-                        <label className="whitespace-nowrap font-semibold">Пошукові запити:</label>
-                        <TextInput placeholder="Пошук..." id="searchTerm" type="text" value={sidebarData.searchTerm} onChange={handleChange}/>
+        <>
+            <div className="flex flex-col md:flex-row">
+                <div className="p-7 border-b md:border-r md:min-h-screen border-gray-500">
+                    <form className="flex flex-col gap-8" onSubmit={handleSubmit}>
+                        <div className="flex items-center gap-2">
+                            <label className="whitespace-nowrap font-semibold">Пошукові запити:</label>
+                            <TextInput placeholder="Пошук..." id="searchTerm" type="text" value={sidebarData.searchTerm} onChange={handleChange}/>
 
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <label className="font-semibold">Сортування:</label>
+                            <Select onChange={handleChange} value={sidebarData.sort} id="sort">
+                                <option value="desc">Найновіші</option>
+                                <option value="asc">Найдавніші</option>
+                            </Select>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <label className="font-semibold">Катеорія:</label>
+                            <Select onChange={handleChange} value={sidebarData.category} id="category">
+                                <option value='без категорії'>Без категорії</option>
+                                <option value='ідея'>Ідея</option>
+                                <option value='проблема'>Проблема</option>
+                                <option value='волонтерство'>Волонтерство</option>
+                                <option value='іншe'>Iнше</option>
+                            </Select>
+                        </div>
+                        <Button type="submite" outline gradientDuoTone="purpleToBlue">
+                            Застосувати зміни
+                        </Button>
+                    </form>
+                </div>
+                <div className="w-full">
+                    <h1 className="text-3xl font-semibold sm:border-b border-gray-500 p-3 ">Резултати пошуку:</h1>
+                    <div className="p-7 flex flex-wrap  gap-4">
+                        {!loading && posts.length === 0 && (
+                            <p className="text-xl text-gray-500">
+                                не знайдено жодних постів
+                            </p>
+                        )}
+                        {loading && <p className="text-xl text-gray-500">Завантаження...</p>}
+                        {!loading && posts && posts.map((post) => (
+                            <PostCard key={post._id} post={post}/>
+                        ))}
+                        {showMore && (
+                            <button onClick={handleShowMore} className="text-teal-500 text-lg hover:underline p-7 w-full">
+                                Показати більше
+                            </button>
+                        )}
                     </div>
-                    <div className="flex items-center gap-2">
-                        <label className="font-semibold">Сортування:</label>
-                        <Select onChange={handleChange} value={sidebarData.sort} id="sort">
-                            <option value="desc">Найновіші</option>
-                            <option value="asc">Найдавніші</option>
-                        </Select>
-                    </div>
-                    <div className="flex items-center gap-2">
-                        <label className="font-semibold">Катеорія:</label>
-                        <Select onChange={handleChange} value={sidebarData.category} id="category">
-                            <option value='без категорії'>Без категорії</option>
-                            <option value='ідея'>Ідея</option>
-                            <option value='проблема'>Проблема</option>
-                            <option value='волонтерство'>Волонтерство</option>
-                            <option value='іншe'>Iнше</option>
-                        </Select>
-                    </div>
-                    <Button type="submite" outline gradientDuoTone="purpleToBlue">
-                        Застосувати зміни
-                    </Button>
-                </form>
-            </div>
-            <div className="w-full">
-                <h1 className="text-3xl font-semibold sm:border-b border-gray-500 p-3 p-5">Резултати пошуку:</h1>
-                <div className="p-7 flex flex-wrap  gap-4">
-                    {!loading && posts.length === 0 && (
-                        <p className="text-xl text-gray-500">
-                            не знайдено жодних постів
-                        </p>
-                    )}
-                    {loading && <p className="text-xl text-gray-500">Завантаження...</p>}
-                    {!loading && posts && posts.map((post) => (
-                        <PostCard key={post._id} post={post}/>
-                    ))}
-                    {showMore && (
-                        <button onClick={handleShowMore} className="text-teal-500 text-lg hover:underline p-7 w-full">
-                            Показати більше
-                        </button>
-                    )}
                 </div>
             </div>
-        </div>
+            <Footer/>
+        </>
     )
 }
