@@ -48,7 +48,7 @@ export function Home() {
               <camera bias={2} />
               <OrbitControls autoRotate={true} enableRotate={false} enablePan={false} enableZoom={false}/>
               <Suspense fallback={null}>
-                <StudentHat position={[-1, -1, -2]}/>
+                <StudentHat scale={1.5}/>
               </Suspense>
               
               <Environment preset='sunset'/>
