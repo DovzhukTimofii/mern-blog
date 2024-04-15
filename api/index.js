@@ -80,7 +80,6 @@ io.on("connection", (socket) => {
     });
   });
   
-server.listen(3000, () => {
-    console.log("SERVER RUNNING");
+server.listen(3002, () => {
+    console.log("server listen 3002 port");
 });
-  
