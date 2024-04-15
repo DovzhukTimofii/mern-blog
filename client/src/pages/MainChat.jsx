@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import moment from 'moment';
 import io from "socket.io-client";
 
-const socket = io.connect("http://localhost:3002");
+const socket = io.connect("http://localhost:3000");
 export default function MainChat() {
     const { currentUser } = useSelector((state) => state.user);
     const { showChat } = useSelector((state) => state.showChat);
